@@ -34,7 +34,8 @@
 					<td><span>${data.sana_maara}</span></td>
 					<td><span>${data.nimi}</span></td>
 				</tr>
-				</c:forEach>			
+				</c:forEach>
+				<tfoot><tr><td colspan="2"><a href="LisaaUusiKayttaja"><button class="button">Lisää uusi käyttäjä</button></a></td></tr></tfoot>			
 			</table>
 	</div>
 
@@ -54,10 +55,10 @@
 					<td><span>${sanat_data.kayttaja.nimi}</span></td>
 					
 				</tr>
-				</c:forEach>			
+				</c:forEach>
+				<tfoot><tr><td colspan="4"><a href="LisaaSana"><button class="button">Lisää uusi sana</button></a></td></tr></tfoot>			
 			</table>
 	</div>
-
 
 
 </body>

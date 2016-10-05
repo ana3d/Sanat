@@ -1,8 +1,12 @@
 package fi.antti.spring.bean;
 
+import javax.validation.constraints.Size;
+
 public class Kayttaja {
 
 	private int id;
+	
+	@Size (min = 1, max = 255)
 	private String nimi;
 	private int sana_maara;
 

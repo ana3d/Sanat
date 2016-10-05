@@ -19,7 +19,7 @@
 
 		<fieldset>
 			<legend>Tunnukset</legend>
-			Testitunnareina voi käyttää sulkis/sulkis
+			Testitunnareina voi käyttää sanat/sanat
 		</fieldset>
 
 		<h3>Linkki</h3>

@@ -1,10 +1,19 @@
 package fi.antti.spring.bean;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Sana {
 
 	private int id;
+	
+	@Size(min = 1, max = 255)
 	private String sana;
+	
+	@Size(min = 1, max = 255)
 	private String seloste;
+	
 	private Kayttaja kayttaja;
 	private String timestamp;
 	private int kayttaja_id;
