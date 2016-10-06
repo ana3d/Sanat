@@ -72,6 +72,13 @@ public class SecureController {
 	@RequestMapping(value = "/LisaaUusiKayttaja", method = RequestMethod.POST)
 	public String lisaaKayttaja( @ModelAttribute(value="kayttaja") @Valid Kayttaja kayttaja, BindingResult result, Model model) {
 		
+		List<Sana> sanat = sdao.haeKaikki();
+		List<Kayttaja> pisteet = kdao.haeKaikkiPisteet();
+		model.addAttribute("sanat", sanat);
+		model.addAttribute("pisteet", pisteet);	
+		kdao.talleta(kayttaja);
+		logger.info("Haettu kaikki sanat & k‰ytt‰jien pisteet tietokannasta");
+		
 		
 		if (result.hasErrors()) {
 			
@@ -79,12 +86,6 @@ public class SecureController {
 			return "secure/addUser";
 		} else {
 			
-			List<Sana> sanat = sdao.haeKaikki();
-			List<Kayttaja> pisteet = kdao.haeKaikkiPisteet();
-			model.addAttribute("sanat", sanat);
-			model.addAttribute("pisteet", pisteet);	
-			kdao.talleta(kayttaja);
-			logger.info("Haettu kaikki sanat & k‰ytt‰j‰ien pisteet tietokannasta");
 			logger.info("Lis‰‰ uusi paino nappia on painettu. Tuupataan tietokantaan");
 			return "secure/main";
 		}
@@ -103,20 +104,21 @@ public class SecureController {
 	@RequestMapping(value = "/LisaaSana", method = RequestMethod.POST)
 	public String lisaaSana( @ModelAttribute(value="sana") @Valid Sana sana, BindingResult result, Model model) {
 		
+		List<Sana> sanat = sdao.haeKaikki();
+		List<Kayttaja> pisteet = kdao.haeKaikkiPisteet();
+		List<Kayttaja> kayttajat = kdao.haeKaikkiKayttajat();
+		model.addAttribute("sanat", sanat);
+		model.addAttribute("pisteet", pisteet);
+		model.addAttribute("kayttajat", kayttajat);
+		logger.info("Haettu kaikki sanat & k‰ytt‰j‰ien pisteet tietokannasta");
+		
 		
 		if (result.hasErrors()) {
-			List<Kayttaja> kayttajat = kdao.haeKaikkiKayttajat();
-			model.addAttribute("kayttajat", kayttajat);
 			logger.info("Joku kentt‰ ei mennyt l‰pi validoinnista");
 			
 			return "secure/addWord";
 		} else {
-			sdao.talleta(sana);			
-			List<Sana> sanat = sdao.haeKaikki();
-			List<Kayttaja> pisteet = kdao.haeKaikkiPisteet();
-			model.addAttribute("sanat", sanat);
-			model.addAttribute("pisteet", pisteet);
-			logger.info("Haettu kaikki sanat & k‰ytt‰j‰ien pisteet tietokannasta");
+			sdao.talleta(sana);
 			logger.info("Lis‰‰ uusi paino nappia on painettu. Tuupataan tietokantaan");
 			return "secure/main";
 		}

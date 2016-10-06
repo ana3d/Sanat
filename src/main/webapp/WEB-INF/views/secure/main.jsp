@@ -9,57 +9,48 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pääsivu</title>
+<title>Sanasovellus</title>
 <link rel="stylesheet" type="text/css"
 	href="../resources/main.css">
 </head>
 <body>
-<p><a href="../j_spring_security_logout" style="float: right;"> Kirjaudu ulos</a></p>
-<h3>Sisäänkirjautuneena: <sec:authentication property="principal.username"/></h3>
+<a href="LisaaSana"><button class="button">Lisää uusi sana</button></a>
+<a href="LisaaUusiKayttaja"><button class="button">Lisää uusi käyttäjä</button></a>
+<a href="../j_spring_security_logout" style="float: right;"><button class="button"> Kirjaudu ulos</button></a><br>
+<span style="float: right;">Sisäänkirjautuneena: <sec:authentication property="principal.username"/></span>
 
 
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-<p><a href="admin/tools">Admin tools</a></p>
+<%-- Admin hässäkät tähän --%>
 </sec:authorize>
 
-	<div class="tableDiv">
-		
-			<table class="printTable">
-				<tr>
-					<th colspan="2">Sanoja lisänneet</th>
-				</tr>
-				<tr><td>Kpl</td><td>Nimi</td>
+<div class="container1">
+	<div class="cardSanamaara">
+				<div class="cardHeader">Sanoja lisänneet</div>
 				<c:forEach var="data" items="${pisteet}">
-				<tr>
-					<td><span>${data.sana_maara}</span></td>
-					<td><span>${data.nimi}</span></td>
-				</tr>
+				<div class="cardData>">${data.sana_maara} ${data.nimi}</div>
 				</c:forEach>
-				<tfoot><tr><td colspan="2"><a href="LisaaUusiKayttaja"><button class="button">Lisää uusi käyttäjä</button></a></td></tr></tfoot>			
-			</table>
+						
+
 	</div>
 
-	<div class="tableDiv">
+	<div class="card">
 		
-			<table class="printTable">
-				<tr>
-					<th colspan="4"> Sanalistaus</th>
-				</tr>
-				<tr>
-				<td>Aikaleima</td><td>Sana</td><td>Seloste</td><td>Lisääjä</td>
+		<div class="cardHeader">Sanalistaus</div>
 				<c:forEach var="sanat_data" items="${sanat}">
-				<tr>
-					<td><span>${sanat_data.timestamp}</span></td>
-					<td><span>${sanat_data.sana}</span></td>
-					<td><span>${sanat_data.seloste}</span></td>
-					<td><span>${sanat_data.kayttaja.nimi}</span></td>
-					
-				</tr>
+				<div class="card">
+				<div class="cardHeader">
+				${sanat_data.timestamp} / ${sanat_data.kayttaja.nimi}</div>
+				Sana: <span class="sana"> ${sanat_data.sana} </span>
+				Seloste: <span class="sana"> ${sanat_data.seloste}</span>
+				</div>
 				</c:forEach>
-				<tfoot><tr><td colspan="4"><a href="LisaaSana"><button class="button">Lisää uusi sana</button></a></td></tr></tfoot>			
-			</table>
+				
 	</div>
-
+	
+	
+	
+</div>
 
 </body>
 </html>
