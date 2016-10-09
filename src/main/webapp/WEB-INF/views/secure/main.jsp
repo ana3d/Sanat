@@ -37,16 +37,35 @@
 	<div class="card">
 		
 		<div class="cardHeader">Sanalistaus</div>
+
+			<table class="wordTable">
+				<tr>
+					<th>Aikaleima</th>
+					<th>Sana</th>
+					<th>Seloste</th>
+					<th>Käyttäjä</th>
+				</tr>
 				<c:forEach var="sanat_data" items="${sanat}">
-				<div class="card">
-				<div class="cardHeader">
-				${sanat_data.timestamp} / ${sanat_data.kayttaja.nimi}</div>
-				Sana: <span class="sana"> ${sanat_data.sana} </span>
-				Seloste: <span class="sana"> ${sanat_data.seloste}</span>
-				</div>
+					<tr>
+						<td>${sanat_data.timestamp}</td>
+						<td>${sanat_data.sana}</td>
+						<td>${sanat_data.seloste}</td>
+						<td>${sanat_data.kayttaja.nimi}</td>
+					</tr>
 				</c:forEach>
-				
-	</div>
+
+
+
+			</table>
+
+
+
+		</div>
+	
+	
+	
+	
+	
 	
 	
 	
