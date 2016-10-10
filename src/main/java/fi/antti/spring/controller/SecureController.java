@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fi.antti.spring.bean.Kayttaja;
 import fi.antti.spring.bean.Sana;
@@ -76,7 +77,7 @@ public class SecureController {
 		List<Kayttaja> pisteet = kdao.haeKaikkiPisteet();
 		model.addAttribute("sanat", sanat);
 		model.addAttribute("pisteet", pisteet);	
-		kdao.talleta(kayttaja);
+		
 		logger.info("Haettu kaikki sanat & k‰ytt‰jien pisteet tietokannasta");
 		
 		
@@ -85,7 +86,12 @@ public class SecureController {
 			logger.info("Joku kentt‰ ei mennyt l‰pi validoinnista");
 			return "secure/addUser";
 		} else {
-			
+			kdao.talleta(kayttaja);
+			sanat = sdao.haeKaikki();
+			pisteet = kdao.haeKaikkiPisteet();
+			model.addAttribute("sanat", sanat);
+			model.addAttribute("pisteet", pisteet);	
+			logger.info("Haettu kaikki sanat & k‰ytt‰jien pisteet tietokannasta uudestaan");
 			logger.info("Lis‰‰ uusi paino nappia on painettu. Tuupataan tietokantaan");
 			return "secure/main";
 		}
@@ -119,9 +125,22 @@ public class SecureController {
 			return "secure/addWord";
 		} else {
 			sdao.talleta(sana);
+			sanat = sdao.haeKaikki();
+			pisteet = kdao.haeKaikkiPisteet();
+			kayttajat = kdao.haeKaikkiKayttajat();
+			model.addAttribute("sanat", sanat);
+			model.addAttribute("pisteet", pisteet);
+			model.addAttribute("kayttajat", kayttajat);
+			logger.info("Haettu kaikki sanat & k‰ytt‰jien pisteet tietokannasta");
 			logger.info("Lis‰‰ uusi paino nappia on painettu. Tuupataan tietokantaan");
 			return "secure/main";
 		}
+	}
+	
+	@RequestMapping("sanat.json")
+	public @ResponseBody List<Sana> haeSanatJSON() {
+		List<Sana> sanat = sdao.haeKaikki();
+		return sanat;
 	}
 	
 

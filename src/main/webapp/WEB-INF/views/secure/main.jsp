@@ -16,6 +16,7 @@
 <body>
 <a href="LisaaSana"><button class="button">Lis‰‰ uusi sana</button></a>
 <a href="LisaaUusiKayttaja"><button class="button">Lis‰‰ uusi k‰ytt‰j‰</button></a>
+<a href=sanat.json><button class="button">Sanat JSON</button></a>
 <a href="../j_spring_security_logout" style="float: right;"><button class="button"> Kirjaudu ulos</button></a><br>
 <span style="float: right;">Sis‰‰nkirjautuneena: <sec:authentication property="principal.username"/></span>
 
